@@ -37,14 +37,14 @@ class CeasarCipher {
 
         string encrypt(string message) {
             for(char &c: message) {
-                encryptChar(c);
+                c = encryptChar(c);
             }
             return message;
         }
         
         string decrypt(string message) {
             for(char &c: message) {
-                decryptChar(c);
+                c =  decryptChar(c);
             }
             return message;
         }
