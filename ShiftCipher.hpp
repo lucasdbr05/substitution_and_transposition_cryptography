@@ -1,4 +1,5 @@
 #include <string>
+#pragma once
 using namespace std;
 
 class ShiftCipher {
@@ -34,6 +35,8 @@ class ShiftCipher {
 
 
     public:
+        ShiftCipher() {}
+
         ShiftCipher(int k) {
             this->k = k;
         }

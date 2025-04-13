@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#pragma once
 using namespace std;
 
 class RailFenceCipher {
@@ -23,7 +24,7 @@ class RailFenceCipher {
 
             for(int i=0; i< this->k; i++){
                 for(auto c: this->rails[i]) {
-                    if(c != ' ') {
+                    if(c != '*') {
                         chipher_text += c;
                     }
                 }
@@ -32,13 +33,15 @@ class RailFenceCipher {
         }
 
     public:
+        RailFenceCipher(){}
+        
         RailFenceCipher(int n_rails) {
             this->k = n_rails;
         }
 
         string encrypt(string message) {
             int n = message.size();
-            rails = vector(k, vector<char>(n, ' '));
+            rails = vector(k, vector<char>(n, '*'));
 
             int rail = 0;
             int direction = 1; // 1 -> down | -1 -> down
@@ -55,7 +58,7 @@ class RailFenceCipher {
         string decrypt(string chipher_text) {
             int n = chipher_text.size();
 
-            rails = vector(k, vector<char>(n, ' '));
+            rails = vector(k, vector<char>(n, '*'));
             
             int diff = 2 * (k-1) -1;
             for(int i=0; i<k; i++) {

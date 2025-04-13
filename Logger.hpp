@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#pragma once
 using namespace std;
 
 class Logger {
@@ -19,7 +20,6 @@ class Logger {
             cout << "2C - Break rails fence by brute force\n";
             cout << "2D - Break rails fece by frequency distribution\n";
             cout << "0 - Stop\n";
-            system("cls");
         }  
         
         static void print_vector(vector<string> v) {
