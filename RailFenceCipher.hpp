@@ -52,7 +52,7 @@ class RailFenceCipher {
             return get_rails_text();
         }
 
-        string decript(string chipher_text) {
+        string decrypt(string chipher_text) {
             int n = chipher_text.size();
 
             rails = vector(k, vector<char>(n, ' '));

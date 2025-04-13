@@ -12,12 +12,18 @@ class BruteForceSubtitution {
             'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'Z', 'X', 'Q'};
         
     public:
-        void breakChipher(string chipherText) {
+        BruteForceSubtitution () {}
+
+        vector<string> breakChipher(string chipherText) {
+            vector<string> res;
             for(int i=0; i<26; i++) {
                 int k = (mostCommonLetters[i] - 'A');
                 
                 shiftCipher = ShiftCipher(k);
-                shiftCipher.decrypt(chipherText);
-            }        
+                res.push_back(
+                    shiftCipher.decrypt(chipherText)
+                );
+            }     
+            return res;
         }
 };

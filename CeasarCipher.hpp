@@ -2,6 +2,7 @@
 using namespace std;
 
 class CeasarCipher : public ShiftCipher {
-    CeasarCipher():
-         ShiftCipher(3) {}
+    public:
+        CeasarCipher():
+            ShiftCipher(3) {}
 };
