@@ -17,7 +17,7 @@ class BreakSubstitutionCipher {
             return (c - most_frequent_letters[iht_most_frequent] + 26) % 26;
         }
 
-        vector<pair<int, char>> get_words_frequency_in_descending_order(string cipher_text) {
+        vector<pair<int, char>> get_letters_frequency_in_descending_order(string cipher_text) {
             map<char, int> frequency_letter;
             vector<pair<int, char>> sorted_frequency;
             int n = cipher_text.size();
@@ -51,7 +51,7 @@ class BreakSubstitutionCipher {
         vector<string> frequency_distribution(string cipher_text) {
             vector<string> res;
             
-            vector<pair<int, char>> sorted_frequency = get_words_frequency_in_descending_order(cipher_text);
+            vector<pair<int, char>> sorted_frequency = get_letters_frequency_in_descending_order(cipher_text);
         
             for(int i=0; i<26; i++) {
                 shift_cipher = ShiftCipher(calculate_key(sorted_frequency[i].second, i));
