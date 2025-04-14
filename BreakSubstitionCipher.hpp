@@ -5,19 +5,19 @@
 using namespace std;
 
 
-class BruteForceSubtitution {
+class BreakSubstitutionCipher {
     private: 
-        ShiftCipher shiftCipher;
+        ShiftCipher shift_cipher;
 
     public:
-        BruteForceSubtitution () {}
+        BreakSubstitutionCipher () {}
 
-        vector<string> breakChipher(string chipherText) {
+        vector<string> brute_force(string chipherText) {
             vector<string> res;
             for(int k=0; k<26; k++) {                
-                shiftCipher = ShiftCipher(k);
+                shift_cipher = ShiftCipher(k);
                 res.push_back(
-                    shiftCipher.decrypt(chipherText)
+                    shift_cipher.decrypt(chipherText)
                 );
             }     
             return res;

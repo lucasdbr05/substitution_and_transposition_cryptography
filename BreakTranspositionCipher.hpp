@@ -5,21 +5,21 @@
 using namespace std;
 
 
-class BruteForceTransposition {
+class BreakTranspositionCipher {
     private: 
-        RailFenceCipher railsFence;
+        RailFenceCipher rails_fence;
 
     public:
-        BruteForceTransposition () {}
+        BreakTranspositionCipher () {}
 
-        vector<string> breakChipher(string chipherText) {
+        vector<string> brute_force(string chipherText) {
             vector<string> res;
             int n = chipherText.size();
             for(int k=2; k<=n; k++) {
                 
-                railsFence = RailFenceCipher(k);
+                rails_fence = RailFenceCipher(k);
                 res.push_back(
-                    railsFence.decrypt(chipherText)
+                    rails_fence.decrypt(chipherText)
                 );
             }     
             return res;

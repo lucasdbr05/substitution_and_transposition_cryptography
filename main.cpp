@@ -2,8 +2,8 @@
 #include "Logger.hpp"
 #include "CeasarCipher.hpp"
 #include "RailFenceCipher.hpp"
-#include "BruteForceSubstitution.hpp"
-#include "BruteForceTransposition.hpp"
+#include "BreakSubstitionCipher.hpp"
+#include "BreakTranspositionCipher.hpp"
 using namespace std;
 
 void do_command(string option) {
@@ -21,11 +21,11 @@ void do_command(string option) {
         Logger::print_string("Cipher text resulted from decryptation:");
         Logger::print_string(ceasarCipher.decrypt(text));
     } else if(option == "1C") {
-        BruteForceSubtitution brute;
+        BreakSubstitutionCipher brute;
         Logger::print_string("Type text to be broked using brute force:");
         getline(cin >> ws, text);
         Logger::print_string("Brute force generated the following texts:");
-        Logger::print_vector(brute.breakChipher(text));
+        Logger::print_vector(brute.brute_force(text));
     }  else if(option == "1D") {
         // TODO HEHE
     } else if(option == "2A") {
@@ -41,11 +41,11 @@ void do_command(string option) {
         Logger::print_string("Cipher text resulted from decryptation:");
         Logger::print_string(railsFenceChiper.decrypt(text)); 
     } else if (option == "2C") {
-        BruteForceTransposition brute;
+        BreakTranspositionCipher brute;
         Logger::print_string("Type text to be broked using brute force:");
         getline(cin >> ws, text);
         Logger::print_string("Brute force generated the following texts:");
-        Logger::print_vector(brute.breakChipher(text));
+        Logger::print_vector(brute.brute_force(text));
     } else if (option == "2D") {
         // TODO HEHE
     } else {
