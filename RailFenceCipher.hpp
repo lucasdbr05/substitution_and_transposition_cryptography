@@ -4,7 +4,6 @@
 using namespace std;
 
 class RailFenceCipher {
-    
     private:
         int k;
         vector<vector<char>> rails;
