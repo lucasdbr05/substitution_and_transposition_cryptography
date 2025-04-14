@@ -51,7 +51,11 @@ void do_command(string option) {
         Logger::print_string("Brute force generated the following texts:");
         Logger::print_vector(crack.brute_force(text));
     } else if (option == "2D") {
-        // TODO HEHE
+        BreakTranspositionCipher crack;
+        Logger::print_string("Type text to be broked using frequency distribution:");
+        getline(cin >> ws, text);
+        Logger::print_string("Frequency distribution generated the following texts:");
+        Logger::print_vector(crack.frequency_distribution(text));
     } else {
         Logger::print_string("Option not found :(");
     }

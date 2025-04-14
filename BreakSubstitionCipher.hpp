@@ -1,4 +1,5 @@
 #include "ShiftCipher.hpp"
+#include "Utils.hpp"
 #include <string>
 #include <vector>
 #include <map>
@@ -11,8 +12,6 @@ using namespace std;
 class BreakSubstitutionCipher {
     private: 
         ShiftCipher shift_cipher;
-        vector<char> most_frequent_letters = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U', 
-            'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'X', 'Q', 'Z'};
         
         int calculate_key(int c, int iht_most_frequent) {
             return (c - most_frequent_letters[iht_most_frequent] + 26) % 26;
