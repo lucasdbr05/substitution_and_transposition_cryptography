@@ -45,5 +45,5 @@ T - Change to input from user
     <li>T: Modifica a fonte dos inputs (ou do usuário ou dos arquivos de texto)</li>
     <li>0: para o programa</li>
     <li>Iniciadas em 1: realiza operações relacionadas à cifra de substituição</li>
-    <li>Iniciadas em 2: realiza operações relacionadas à cifra de transposição0</li>
+    <li>Iniciadas em 2: realiza operações relacionadas à cifra de transposição</li>
 </ul>
