@@ -74,7 +74,7 @@ void do_command(string option, bool& user_input) {
     } else if (option == "2D") {
         BreakTranspositionCipher crack;
         Logger::print_string("Type text to be broked using frequency distribution:");
-        text = input(user_input, "2D");
+        text = input(user_input, "inputs/2D.txt");
         Logger::line_space();
         Logger::print_string("Frequency distribution generated the following text:");
         Logger::print_string(crack.frequency_distribution(text));
