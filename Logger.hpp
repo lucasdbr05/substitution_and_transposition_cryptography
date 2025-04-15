@@ -20,7 +20,7 @@ class Logger {
             cout << "2A - Encrypt using Rails Fence Cipher (transposition)\n";
             cout << "2B - Decrypt using Rails Fence Cipher (transposition)\n";
             cout << "2C - Break rails fence by brute force\n";
-            cout << "2D - Break rails fece by frequency distribution\n";
+            cout << "2D - Break rails fence by frequency distribution\n";
         }  
         
         static void print_vector(vector<string> v) {
@@ -31,5 +31,9 @@ class Logger {
 
         static void print_string(string s) {
             cout << s << '\n';
+        }
+
+        static void line_space() {
+            cout << '\n';
         }
 };

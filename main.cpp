@@ -26,35 +26,41 @@ void do_command(string option, bool& user_input) {
         CeasarCipher ceasar_cipher;
         Logger::print_string("Type text to be encrypted:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Cipher text resulted from encryptation:");
         Logger::print_string(ceasar_cipher.encrypt(text));
     } else if(option == "1B") {
         CeasarCipher ceasar_cipher;
         Logger::print_string("Type text to be decrypted:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Cipher text resulted from decryptation:");
         Logger::print_string(ceasar_cipher.decrypt(text));
     } else if(option == "1C") {
         BreakSubstitutionCipher crack;
         Logger::print_string("Type text to be broked using brute force:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Brute force generated the following texts:");
         Logger::print_vector(crack.brute_force(text));
     }  else if(option == "1D") {
         BreakSubstitutionCipher crack;
         Logger::print_string("Type text to be broked using frequency distribution:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Frequency distribution generated the following texts:");
         Logger::print_string(crack.frequency_distribution(text));
     } else if(option == "2A") {
         Logger::print_string("Type text to be encrypted:");
         getline(cin>> ws, text);
+        Logger::line_space();
         RailFenceCipher rails_fence_cipher(3);
         Logger::print_string("Cipher text resulted from encryptation:");
         Logger::print_string(rails_fence_cipher.encrypt(text)); 
     } else if(option == "2B") {
         Logger::print_string("Type text to be decrypted:");
         getline(cin>> ws, text);
+        Logger::line_space();
         RailFenceCipher rails_fence_cipher(3);
         Logger::print_string("Cipher text resulted from decryptation:");
         Logger::print_string(rails_fence_cipher.decrypt(text)); 
@@ -62,12 +68,14 @@ void do_command(string option, bool& user_input) {
         BreakTranspositionCipher crack;
         Logger::print_string("Type text to be broked using crackforce:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Brute force generated the following texts:");
         Logger::print_vector(crack.brute_force(text));
     } else if (option == "2D") {
         BreakTranspositionCipher crack;
         Logger::print_string("Type text to be broked using frequency distribution:");
         getline(cin >> ws, text);
+        Logger::line_space();
         Logger::print_string("Frequency distribution generated the following text:");
         Logger::print_string(crack.frequency_distribution(text));
     } else if(option == "T") {
@@ -76,6 +84,8 @@ void do_command(string option, bool& user_input) {
     } else {
         Logger::print_string("Option not found :(");
     }
+    
+    Logger::line_space();
     Logger::print_string("Type Y to continue");
     getline(cin >>ws, text);
 }
