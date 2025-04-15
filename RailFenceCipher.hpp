@@ -10,10 +10,10 @@ class RailFenceCipher {
 
         int update_direction(int rail, int direction) {
             if (rail + direction == k) {
-                return -1; // change to go up
+                direction =  -1; // change to go up
             } 
             if(rail + direction < 0) {
-                return 1; // change go down
+                direction =  1; // change go down
             }
             return direction; // keep the direction
         }
