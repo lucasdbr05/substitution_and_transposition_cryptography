@@ -6,12 +6,8 @@ class ShiftCipher {
     private:
         int k;
 
-        bool is_upper_case(char c) {
-            return ('A' <= c && c <= 'Z');
-        }
-        bool is_lower_case(char c) {
-            return ('a' <= c && c <= 'z');
-        }
+        bool is_upper_case(char c) { return ('A' <= c && c <= 'Z'); }
+        bool is_lower_case(char c) { return ('a' <= c && c <= 'z'); }
 
         char encrypt_char(char c) {
             if(is_upper_case(c)) {
