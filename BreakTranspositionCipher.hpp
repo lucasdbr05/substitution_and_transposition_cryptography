@@ -11,15 +11,15 @@ class BreakTranspositionCipher {
     private: 
         RailFenceCipher rails_fence;
 
-        vector<pair<double, string>> get_bigrams_frequency_in_descending_order(string cipher_text) {
-            map<string, int> frequency_bigram;
+        vector<pair<double, string>> get_bigrams_frequency_in_descending_order(string text) {
+            map<string, double> frequency_bigram;
             vector<pair<double, string>> sorted_frequency;
-            int n = cipher_text.size();
+            int n = text.size();
             int count_bigrams = 0;
             for(int i=0; i<n-1; i++){
-                if(cipher_text[i]==' ' || cipher_text[i+1]==' ') continue;
+                if(text[i]==' ' || text[i+1]==' ') continue;
                 count_bigrams++;
-                string bi; bi.push_back(cipher_text[i]); bi.push_back(cipher_text[i+1]);
+                string bi; bi.push_back(text[i]); bi.push_back(text[i+1]);
                 for(auto &c:bi)
                     if('a' <= c && c <= 'z') c = c - 'a' + 'A';
 
@@ -27,18 +27,19 @@ class BreakTranspositionCipher {
             }
 
             for(auto [bi, f]: frequency_bigram) {
-                sorted_frequency.push_back({f/((double)count_bigrams), bi});
+                sorted_frequency.push_back({f/count_bigrams, bi});
             }
 
             sort(sorted_frequency.begin(), sorted_frequency.end(), greater<pair<double, char>>());
             return sorted_frequency;
         }
 
-        double calculate_score(const vector<pair<double, string>> &bigrams_frequency) {
+        double calculate_score(const string & text) {
+            vector<pair<double, string>> bigrams_sorted_frequency = get_bigrams_frequency_in_descending_order(text);
+            
             double score = 0;
 
-            for(auto [f, bigram]: bigrams_frequency) {
-                if(f==0) break;
+            for(auto [f, bigram]: bigrams_sorted_frequency) {
                 score += abs(f - digrams_percent_occurrence[bigram[0]-'A'][bigram[1]-'A']);
             }
 
@@ -72,8 +73,7 @@ class BreakTranspositionCipher {
             for(int k=2; k<=n; k++) {
                 rails_fence = RailFenceCipher(k);
                 string current_plain_text = rails_fence.decrypt(cipher_text);
-                vector<pair<double, string>> sorted_frequency = get_bigrams_frequency_in_descending_order(cipher_text);
-                double current_score = calculate_score(sorted_frequency);
+                double current_score = calculate_score(current_plain_text);
 
                 if(current_score < best_score) {
                     best_score = current_score;
