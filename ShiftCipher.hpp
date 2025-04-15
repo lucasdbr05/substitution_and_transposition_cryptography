@@ -6,30 +6,29 @@ class ShiftCipher {
     private:
         int k;
 
-        bool isUpperCase(char c) {
+        bool is_upper_case(char c) {
             return ('A' <= c && c <= 'Z');
         }
-        bool isLowerCase(char c) {
+        bool is_lower_case(char c) {
             return ('a' <= c && c <= 'z');
         }
 
-        char encryptChar(char c) {
-            if(isUpperCase(c)) {
+        char encrypt_char(char c) {
+            if(is_upper_case(c)) {
                 c = 'A' + (c - 'A' + k)%26; 
-            } else if(isLowerCase(c)) {
+            } else if(is_lower_case(c)) {
                 c = 'a' + (c - 'a' + k)%26;
             }
 
             return c;
         }
 
-        char decryptChar(char c) {
-            if(isUpperCase(c)) {
+        char decrypt_char(char c) {
+            if(is_upper_case(c)) {
                 c = 'A' + (c - 'A' - k + 26)%26; 
-            } else if(isLowerCase(c)) {
+            } else if(is_lower_case(c)) {
                 c = 'a' + (c - 'a' - k + 26)%26;
             }
-
             return c;
         }
 
@@ -42,14 +41,14 @@ class ShiftCipher {
         }
         string encrypt(string message) {
             for(char &c: message) {
-                c = encryptChar(c);
+                c = encrypt_char(c);
             }
             return message;
         }
         
         string decrypt(string message) {
             for(char &c: message) {
-                c =  decryptChar(c);
+                c =  decrypt_char(c);
             }
             return message;
         }
