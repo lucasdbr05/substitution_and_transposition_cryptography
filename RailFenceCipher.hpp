@@ -10,12 +10,12 @@ class RailFenceCipher {
 
         int update_direction(int rail, int direction) {
             if (rail + direction == k) {
-                return -1; // to go up
+                return -1; // change to go up
             } 
             if(rail + direction < 0) {
-                return 1; // to go down
+                return 1; // change go down
             }
-            return direction;// to keep the direction
+            return direction; // keep the direction
         }
 
         string get_rails_text(bool encrypt) {
@@ -53,7 +53,7 @@ class RailFenceCipher {
             rails = vector(k, vector<char>(n, '*'));
 
             int rail = 0;
-            int direction = 1; // 1 -> down | -1 -> down
+            int direction = 1;
 
             for(int i=0; i<n; i++){
                 rails[rail][i] = message[i];
@@ -69,6 +69,7 @@ class RailFenceCipher {
 
             rails = vector(k, vector<char>(n, '*'));
             vector<int> rails_len = vector<int>(k, 0);
+            
             int direction = 1, rail = 0;
             for(int i=0; i<n; i++){
                 rails_len[rail]++;
@@ -77,22 +78,21 @@ class RailFenceCipher {
             }
 
 
-            int diff = 2*(k-1) ;
-            int curr = 0;
+            int diff1 = 2*(k-1), diff2 = 0;
             for(int i=0; i<k; i++){
-                for(int j = i; j<n; j+= diff) {
-                    rails[i][j] = cipher_text[curr];
-                    curr+= (diff != 0);
+                for(int j = i; j<n; j+= diff1) {
+                    rails[i][j] = cipher_text[diff2];
+                    diff2+= (diff1 != 0);
                     if(2*i-1>0) {
                         j+= 2*i;
                         if(j>=n) continue;
-                        rails[i][j] = cipher_text[curr];
-                        curr++;
+                        rails[i][j] = cipher_text[diff2];
+                        diff2++;
                     }
                 }
-                diff = (diff-2<0 ? 0 : diff-2);
+                diff1 = (diff1-2<0 ? 0 : diff1-2);
             }
-            
+
             return get_rails_text(false); 
         }
 };
