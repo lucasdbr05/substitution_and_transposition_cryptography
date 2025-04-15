@@ -15,9 +15,9 @@ class BreakTranspositionCipher {
         RailFenceCipher rails_fence;
         Utils utils;
 
-        vector<pair<double, string>> get_bigrams_frequency_in_descending_order(string text) {
+        map<string, double> get_bigrams_frequency_in_text(string text) {
             map<string, double> frequency_bigram;
-            vector<pair<double, string>> sorted_frequency;
+
             int n = text.size();
             int count_bigrams = 0;
             for(int i=0; i<n-1; i++){
@@ -31,23 +31,24 @@ class BreakTranspositionCipher {
             }
 
             for(auto [bi, f]: frequency_bigram) {
-                sorted_frequency.push_back({f/count_bigrams, bi});
+                frequency_bigram[bi]/=count_bigrams;
             }
 
-            sort(sorted_frequency.begin(), sorted_frequency.end(), greater<pair<double, string>>());
-            return sorted_frequency;
+            return frequency_bigram;
         }
 
         double calculate_score(string & text) {
-            vector<pair<double, string>> bigrams_sorted_frequency = get_bigrams_frequency_in_descending_order(text);
+            map<string, double> bigrams_frequency = get_bigrams_frequency_in_text(text);
             
             double score = 0;
 
-            for(auto [f, bigram]: bigrams_sorted_frequency) {
-                score += abs(f - utils.digrams_percent_occurrence[bigram[0]-'A'][bigram[1]-'A']);
+            for(int i=0; i<26; i++){
+                for(int j=0; j<26; j++){
+                    string bigram; bigram += 'A' + i; bigram+= 'A'+j;
+                    score += abs(bigrams_frequency[bigram] - utils.digrams_percent_occurrence[bigram[0]-'A'][bigram[1]-'A']);
+                }
             }
 
-            score /=26;
             return score;
         }
 

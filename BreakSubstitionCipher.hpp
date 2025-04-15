@@ -19,22 +19,32 @@ class BreakSubstitutionCipher {
             return (c - utils.most_frequent_letters[iht_most_frequent] + 26) % 26;
         }
 
-        vector<pair<double, char>> get_letters_frequency_in_descending_order(string text) {
+        map<char, double> get_letters_frequency_in_text(string text) {
             map<char, double> frequency_letter;
-            vector<pair<double, char>> sorted_frequency;
             int n = text.size();
             int count_letter = 0;
 
             for(auto c: text){
                 if(!utils.is_aplha(c)) continue;
                 count_letter++;
-
+                
                 if('a' <= c && c <= 'z') c = c - 'a' + 'A';
                 frequency_letter[c]++;
             }
 
             for(auto [c, f]: frequency_letter) {
-                sorted_frequency.push_back({f/count_letter, c});
+                frequency_letter[c]/=count_letter;
+            }
+            
+            return frequency_letter;
+        }
+        
+        vector<pair<double, char>> get_letters_frequency_in_descending_order(
+            map<char, double>& frequency_letter
+        ){
+            vector<pair<double, char>> sorted_frequency;
+            for(auto [c, f]: frequency_letter) {
+                sorted_frequency.push_back({f, c});
             }
 
             sort(sorted_frequency.begin(), sorted_frequency.end(), greater<pair<double, char>>());
@@ -42,12 +52,11 @@ class BreakSubstitutionCipher {
         }
 
         double calculate_score(string& text) {
-            vector<pair<double, char>> letters_sorted_frequency = get_letters_frequency_in_descending_order(text);
-            
+            map<char, double> letters_frequency = get_letters_frequency_in_text(text);            
             double score = 0;
 
-            for(auto [f, letter]: letters_sorted_frequency) {
-                score += abs(f - utils.letter_percent_occurrence[letter-'A']);
+            for(int i=0; i<26; i++) {
+                score += abs(letters_frequency['A'+i] - utils.letter_percent_occurrence[i]);
             } 
             return score;
         }
@@ -71,7 +80,9 @@ class BreakSubstitutionCipher {
             int best_k = -1;
             string plain_text;
 
-            vector<pair<double, char>> sorted_frequency = get_letters_frequency_in_descending_order(cipher_text);
+            map<char, double> frequency = get_letters_frequency_in_text(cipher_text);
+            vector<pair<double, char>> sorted_frequency = get_letters_frequency_in_descending_order(frequency);
+            
             for(int i=0; i*i<26; i++) {
                 int k = calculate_key(sorted_frequency[0].second, i);
                 shift_cipher = ShiftCipher(k);
