@@ -65,8 +65,7 @@ class BreakSubstitutionCipher {
             return res;
         }
         
-        vector<string> frequency_distribution(string cipher_text) {
-            vector<string> res;
+        string frequency_distribution(string cipher_text) {
             double best_score = INT32_MAX;
             int best_k = -1;
             string plain_text;
@@ -85,6 +84,6 @@ class BreakSubstitutionCipher {
                     best_k = k;
                 }            
             }
-            return res;
+            return plain_text;
         }
 };

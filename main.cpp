@@ -31,7 +31,7 @@ void do_command(string option) {
         Logger::print_string("Type text to be broked using frequency distribution:");
         getline(cin >> ws, text);
         Logger::print_string("Frequency distribution generated the following texts:");
-        Logger::print_vector(crack.frequency_distribution(text));
+        Logger::print_string(crack.frequency_distribution(text));
     } else if(option == "2A") {
         Logger::print_string("Type text to be encrypted:");
         getline(cin>> ws, text);
