@@ -1,5 +1,5 @@
-#include "ShiftCipher.hpp"
 #pragma once
+#include "ShiftCipher.hpp"
 using namespace std;
 
 class CeasarCipher : public ShiftCipher {

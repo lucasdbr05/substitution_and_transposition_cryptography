@@ -1,16 +1,18 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
-#pragma once
 using namespace std;
 
 class Logger {
     public:
-        static void start() {
+        static void start(bool user_input) {
             cout << "Transposition and Substitution Ciphers - Computer Security - UnB\n";
-
-            cout << "Select Option:\n";
-
+            
+            cout << "Select Option:\n\n";
+            
+            cout << "T - Change to " << (user_input ? "input from existing files" : "input from user") << "\n";
+            cout << "0 - Stop\n";
             cout << "1A - Encrypt using Ceasar Cipher (substitution)\n";
             cout << "1B - Decrypt using Ceasar Cipher(substitution)\n";
             cout << "1C - Break shift cipher by brute force\n";
@@ -19,7 +21,6 @@ class Logger {
             cout << "2B - Decrypt using Rails Fence Cipher (transposition)\n";
             cout << "2C - Break rails fence by brute force\n";
             cout << "2D - Break rails fece by frequency distribution\n";
-            cout << "0 - Stop\n";
         }  
         
         static void print_vector(vector<string> v) {

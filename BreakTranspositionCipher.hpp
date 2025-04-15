@@ -1,15 +1,19 @@
+#pragma once
 #include "RailFenceCipher.hpp"
 #include "Utils.hpp"
 #include <string>
 #include <vector>
+#include <map>
+#include <iostream>
+#include <algorithm>
 #include <math.h>
-#pragma once
 using namespace std;
 
 
 class BreakTranspositionCipher {
     private: 
         RailFenceCipher rails_fence;
+        Utils utils;
 
         vector<pair<double, string>> get_bigrams_frequency_in_descending_order(string text) {
             map<string, double> frequency_bigram;
@@ -17,7 +21,7 @@ class BreakTranspositionCipher {
             int n = text.size();
             int count_bigrams = 0;
             for(int i=0; i<n-1; i++){
-                if(text[i]==' ' || text[i+1]==' ') continue;
+                if(!utils.is_aplha(text[i]) || !utils.is_aplha(text[i+1])) continue;
                 count_bigrams++;
                 string bi; bi.push_back(text[i]); bi.push_back(text[i+1]);
                 for(auto &c:bi)
@@ -30,17 +34,17 @@ class BreakTranspositionCipher {
                 sorted_frequency.push_back({f/count_bigrams, bi});
             }
 
-            sort(sorted_frequency.begin(), sorted_frequency.end(), greater<pair<double, char>>());
+            sort(sorted_frequency.begin(), sorted_frequency.end(), greater<pair<double, string>>());
             return sorted_frequency;
         }
 
-        double calculate_score(const string & text) {
+        double calculate_score(string & text) {
             vector<pair<double, string>> bigrams_sorted_frequency = get_bigrams_frequency_in_descending_order(text);
             
             double score = 0;
 
             for(auto [f, bigram]: bigrams_sorted_frequency) {
-                score += abs(f - digrams_percent_occurrence[bigram[0]-'A'][bigram[1]-'A']);
+                score += abs(f - utils.digrams_percent_occurrence[bigram[0]-'A'][bigram[1]-'A']);
             }
 
             score /=26;
@@ -64,7 +68,7 @@ class BreakTranspositionCipher {
         }
 
         string frequency_distribution(string cipher_text) {
-            double best_score = INT32_MAX;
+            double best_score = utils.INF;
             int best_k = -1;
             string plain_text;
 

@@ -1,25 +1,39 @@
 #include <iostream>
+#include <fstream>
 #include "Logger.hpp"
 #include "CeasarCipher.hpp"
 #include "RailFenceCipher.hpp"
-#include "BreakSubstitionCipher.hpp"
 #include "BreakTranspositionCipher.hpp"
+#include "BreakSubstitionCipher.hpp"
 using namespace std;
 
-void do_command(string option) {
+string input(bool user_input, string file) {
+    string res;
+    if(user_input) {
+        getline(cin >> ws, res);        
+    } else {
+        ifstream File(file);
+        getline(File, res);        
+    }
+
+    return res;
+}
+
+void do_command(string option, bool& user_input) {
     string text;
+
     if(option=="1A") {
-        CeasarCipher ceasarCipher;
+        CeasarCipher ceasar_cipher;
         Logger::print_string("Type text to be encrypted:");
         getline(cin >> ws, text);
         Logger::print_string("Cipher text resulted from encryptation:");
-        Logger::print_string(ceasarCipher.encrypt(text));
+        Logger::print_string(ceasar_cipher.encrypt(text));
     } else if(option == "1B") {
-        CeasarCipher ceasarCipher;
+        CeasarCipher ceasar_cipher;
         Logger::print_string("Type text to be decrypted:");
         getline(cin >> ws, text);
         Logger::print_string("Cipher text resulted from decryptation:");
-        Logger::print_string(ceasarCipher.decrypt(text));
+        Logger::print_string(ceasar_cipher.decrypt(text));
     } else if(option == "1C") {
         BreakSubstitutionCipher crack;
         Logger::print_string("Type text to be broked using brute force:");
@@ -35,15 +49,15 @@ void do_command(string option) {
     } else if(option == "2A") {
         Logger::print_string("Type text to be encrypted:");
         getline(cin>> ws, text);
-        RailFenceCipher railsFenceChiper(3);
+        RailFenceCipher rails_fence_cipher(3);
         Logger::print_string("Cipher text resulted from encryptation:");
-        Logger::print_string(railsFenceChiper.encrypt(text)); 
+        Logger::print_string(rails_fence_cipher.encrypt(text)); 
     } else if(option == "2B") {
         Logger::print_string("Type text to be decrypted:");
         getline(cin>> ws, text);
-        RailFenceCipher railsFenceChiper(3);
+        RailFenceCipher rails_fence_cipher(3);
         Logger::print_string("Cipher text resulted from decryptation:");
-        Logger::print_string(railsFenceChiper.decrypt(text)); 
+        Logger::print_string(rails_fence_cipher.decrypt(text)); 
     } else if (option == "2C") {
         BreakTranspositionCipher crack;
         Logger::print_string("Type text to be broked using crackforce:");
@@ -56,6 +70,9 @@ void do_command(string option) {
         getline(cin >> ws, text);
         Logger::print_string("Frequency distribution generated the following text:");
         Logger::print_string(crack.frequency_distribution(text));
+    } else if(option == "T") {
+        user_input = !user_input;
+        return;
     } else {
         Logger::print_string("Option not found :(");
     }
@@ -65,15 +82,15 @@ void do_command(string option) {
 
 signed main() {
     string option;
-    
+    bool user_input = false;
     do{
         system("cls");
-        Logger::start();
+        Logger::start(user_input);
         cin >> option;
         
         system("cls");
         if(option == "0") break;
-        do_command(option);
+        do_command(option, user_input);
     } while(option!= "0");
 
     return 0;
