@@ -18,17 +18,27 @@ class RailFenceCipher {
             return direction;// to keep the direction
         }
 
-        string get_rails_text() {
-            string chipher_text = "";
+        string get_rails_text(bool encrypt) {
+            string text = "";
 
-            for(int i=0; i< this->k; i++){
-                for(auto c: this->rails[i]) {
-                    if(c != '*') {
-                        chipher_text += c;
+            if(encrypt) {
+                for(int i=0; i< k; i++){
+                    for(auto c: rails[i]) {
+                        if(c != '*') {
+                            text += c;
+                        }
                     }
                 }
+            } else {
+                int direction = 1, rail = 0;
+                int n = rails[0].size();
+                for(int i=0; i<n; i++){
+                    text += rails[rail][i];
+                    direction = update_direction(rail, direction);
+                    rail += direction;
+                }
             }
-            return chipher_text;
+            return text;
         }
 
     public:
@@ -51,25 +61,38 @@ class RailFenceCipher {
                 rail += direction;
             }
 
-            return get_rails_text();
+            return get_rails_text(true);
         }
 
-        string decrypt(string chipher_text) {
-            int n = chipher_text.size();
+        string decrypt(string cipher_text) {
+            int n = cipher_text.size();
 
             rails = vector(k, vector<char>(n, '*'));
-            
-            int diff = 2 * (k-1) -1;
-            for(int i=0; i<k; i++) {
-                for(int j=i; j<n; j+= diff) {
-                    rails[i][j] = chipher_text[j];
-                    if(i*2-1 > 0) {
-                        j+= 2*i+1;
-                        rails[i][j] = chipher_text[j];
+            vector<int> rails_len = vector<int>(k, 0);
+            int direction = 1, rail = 0;
+            for(int i=0; i<n; i++){
+                rails_len[rail]++;
+                direction = update_direction(rail, direction);
+                rail += direction;
+            }
+
+
+            int diff = 2*(k-1) ;
+            int curr = 0;
+            for(int i=0; i<k; i++){
+                for(int j = i; j<n; j+= diff) {
+                    rails[i][j] = cipher_text[curr];
+                    curr+= (diff != 0);
+                    if(2*i-1>0) {
+                        j+= 2*i;
+                        if(j>=n) continue;
+                        rails[i][j] = cipher_text[curr];
+                        curr++;
                     }
                 }
-                diff  = (diff-2<0 ? 0: diff - 2);
+                diff = (diff-2<0 ? 0 : diff-2);
             }
-            return get_rails_text(); 
+            
+            return get_rails_text(false); 
         }
 };
