@@ -94,11 +94,11 @@ signed main() {
     string option;
     bool user_input = false;
     do{
-        system("cls");
+        system("clear");
         Logger::start(user_input);
         cin >> option;
         
-        system("cls");
+        system("clear");
         if(option == "0") break;
         do_command(option, user_input);
     } while(option!= "0");
