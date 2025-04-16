@@ -13,7 +13,7 @@
 Linux:
 ```shell
 g++ -std=c++17 -o main main.cpp
-./main.out
+./main
 ```
 
 Windows:
