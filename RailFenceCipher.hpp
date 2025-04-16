@@ -91,15 +91,7 @@ class RailFenceCipher {
                 }
                 diff = (diff-2<0 ? 0 : diff-2);
             }
-
-            for(int i=0; i<k; i++) {
-                for(int j=0; j<n; j++) {
-                    cout << rails[i][j];
-                }
-                cout << "\n";
-            }
-            cout << "\n";
-
+            
             return get_rails_text(false); 
         }
 };
