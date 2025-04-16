@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include "Logger.hpp"
-#include "CeasarCipher.hpp"
-#include "RailFenceCipher.hpp"
-#include "BreakTranspositionCipher.hpp"
-#include "BreakSubstitionCipher.hpp"
+#include "src/Logger.hpp"
+#include "src/CeasarCipher.hpp"
+#include "src/RailFenceCipher.hpp"
+#include "src/BreakTranspositionCipher.hpp"
+#include "src/BreakSubstitionCipher.hpp"
 using namespace std;
 
 string input(bool user_input, string file) {
