@@ -78,20 +78,27 @@ class RailFenceCipher {
             }
 
 
-            int diff1 = 2*(k-1), diff2 = 0;
-            for(int i=0; i<k; i++){
-                for(int j = i; j<n; j+= diff1) {
-                    rails[i][j] = cipher_text[diff2];
-                    diff2+= (diff1 != 0);
-                    if(2*i-1>0) {
-                        j+= 2*i;
+            int diff = 2*(k-1), i = 0;
+            for(int rail=0; rail<k; rail++) {
+                for(int j = rail; j<n;) {
+                    rails[rail][j] = cipher_text[i];
+                    j+= diff; i+= (diff != 0); 
+                    if(2*rail-1>0) {
                         if(j>=n) continue;
-                        rails[i][j] = cipher_text[diff2];
-                        diff2++;
+                        rails[rail][j] = cipher_text[i];
+                        j+= 2*rail;i++;
                     }
                 }
-                diff1 = (diff1-2<0 ? 0 : diff1-2);
+                diff = (diff-2<0 ? 0 : diff-2);
             }
+
+            for(int i=0; i<k; i++) {
+                for(int j=0; j<n; j++) {
+                    cout << rails[i][j];
+                }
+                cout << "\n";
+            }
+            cout << "\n";
 
             return get_rails_text(false); 
         }
