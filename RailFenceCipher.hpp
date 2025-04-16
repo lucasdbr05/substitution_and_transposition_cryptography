@@ -18,10 +18,10 @@ class RailFenceCipher {
             return direction; // keep the direction
         }
 
-        string get_rails_text(bool encrypt) {
+        string recover_rails_text(bool encrypt) {
             string text = "";
 
-            if(encrypt) {
+            if(encrypt) { // for encypt text 
                 for(int i=0; i< k; i++){
                     for(auto c: rails[i]) {
                         if(c != '*') {
@@ -29,7 +29,7 @@ class RailFenceCipher {
                         }
                     }
                 }
-            } else {
+            } else { // for decrypt
                 int direction = 1, rail = 0;
                 int n = rails[0].size();
                 for(int i=0; i<n; i++){
@@ -61,7 +61,7 @@ class RailFenceCipher {
                 rail += direction;
             }
 
-            return get_rails_text(true);
+            return recover_rails_text(true);
         }
 
         string decrypt(string cipher_text) {
@@ -91,7 +91,7 @@ class RailFenceCipher {
                 }
                 diff = (diff-2<0 ? 0 : diff-2);
             }
-            
-            return get_rails_text(false); 
+
+            return recover_rails_text(false); 
         }
 };
