@@ -5,6 +5,7 @@
 #include "src/RailFenceCipher.hpp"
 #include "src/BreakTranspositionCipher.hpp"
 #include "src/BreakSubstitionCipher.hpp"
+#include "src/ColumnarPermutationCipher.hpp"
 using namespace std;
 
 string input(bool user_input, string file) {
