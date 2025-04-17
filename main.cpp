@@ -2,7 +2,6 @@
 #include <fstream>
 #include "src/Logger.hpp"
 #include "src/CeasarCipher.hpp"
-#include "src/RailFenceCipher.hpp"
 #include "src/BreakTranspositionCipher.hpp"
 #include "src/BreakSubstitionCipher.hpp"
 #include "src/ColumnarPermutationCipher.hpp"
@@ -55,16 +54,16 @@ void do_command(string option, bool& user_input) {
         Logger::print_string("Type text to be encrypted:");
         text = input(user_input, "inputs/2A.txt");
         Logger::line_space();
-        RailFenceCipher rails_fence_cipher(3);
+        ColumnarPermutationCipher columnar_permutation_cipher("LFU");
         Logger::print_string("Cipher text resulted from encryptation:");
-        Logger::print_string(rails_fence_cipher.encrypt(text)); 
+        Logger::print_string(columnar_permutation_cipher.encrypt(text)); 
     } else if(option == "2B") {
         Logger::print_string("Type text to be decrypted:");
         text = input(user_input, "inputs/2B.txt");
         Logger::line_space();
-        RailFenceCipher rails_fence_cipher(3);
+        ColumnarPermutationCipher columnar_permutation_cipher("LFU");
         Logger::print_string("Cipher text resulted from decryptation:");
-        Logger::print_string(rails_fence_cipher.decrypt(text)); 
+        Logger::print_string(columnar_permutation_cipher.decrypt(text)); 
     } else if (option == "2C") {
         BreakTranspositionCipher crack;
         Logger::print_string("Type text to be broked using crackforce:");

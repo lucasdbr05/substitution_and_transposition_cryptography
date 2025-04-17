@@ -58,9 +58,11 @@ class BreakTranspositionCipher {
         vector<string> brute_force(string cipher_text) {
             vector<string> res;
             int n = cipher_text.size();
-            for(int key_size=2; key_size<= min(n, 26); key_size++) {
+            int max_cols = 8;
+
+            for(int key_size=2; key_size<= min(max_cols, 26); key_size++) {
                 string key = utils.alphabet.substr(0, key_size);
-                
+                cout << key << endl;
                 do {
                     permutation_cipher = ColumnarPermutationCipher(key);
 
@@ -80,9 +82,9 @@ class BreakTranspositionCipher {
             string plain_text;
 
             int n = cipher_text.size();
-            int max_cols = 10;
+            int max_cols = 8;
 
-            for(int key_size=2; key_size<=max_cols; key_size++) {
+            for(int key_size=2; key_size<=min(max_cols, 26); key_size++) {
                 string key = utils.alphabet.substr(0, key_size);
                 
                 do {

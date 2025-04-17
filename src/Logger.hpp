@@ -17,10 +17,10 @@ class Logger {
             cout << "1B - Decrypt using Ceasar Cipher(substitution)\n";
             cout << "1C - Break shift cipher by brute force\n";
             cout << "1D - Break shift cipher by frequency distribution\n";
-            cout << "2A - Encrypt using Rails Fence Cipher (transposition)\n";
-            cout << "2B - Decrypt using Rails Fence Cipher (transposition)\n";
-            cout << "2C - Break rails fence by brute force\n";
-            cout << "2D - Break rails fence by frequency distribution\n";
+            cout << "2A - Encrypt using Columnar Permutation Cipher (transposition)\n";
+            cout << "2B - Decrypt using Columnar Permutation Cipher (transposition)\n";
+            cout << "2C - Break columnar permutation by brute force\n";
+            cout << "2D - Break columnar permutation by frequency distribution\n";
         }  
         
         static void print_vector(vector<string> v) {

@@ -71,10 +71,6 @@ class ColumnarPermutationCipher {
             
             permute_columns();
             
-            for(auto a:t_matrix) {
-                for (auto b:a) cout << b;
-                cout << endl;
-            }
             return build_cipher_text(rows);
         }
 
