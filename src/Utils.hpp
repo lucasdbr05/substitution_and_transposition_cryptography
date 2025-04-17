@@ -6,7 +6,8 @@ using namespace std;
 struct Utils
 {
     const double INF = 0x3f3f3f3f3f3f;
-    
+    const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     const vector<char> most_frequent_letters = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U', 'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'X', 'Q', 'Z'};
     const vector<double> letter_percent_occurrence = {
         0.804,  // A

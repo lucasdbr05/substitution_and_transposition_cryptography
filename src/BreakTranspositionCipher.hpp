@@ -1,5 +1,5 @@
 #pragma once
-#include "RailFenceCipher.hpp"
+#include "ColumnarPermutationCipher.hpp"
 #include "Utils.hpp"
 #include <string>
 #include <vector>
@@ -12,7 +12,7 @@ using namespace std;
 
 class BreakTranspositionCipher {
     private: 
-        RailFenceCipher rails_fence;
+        ColumnarPermutationCipher permutation_cipher;
         Utils utils;
 
         map<string, double> get_bigrams_frequency_in_text(string text) {
@@ -58,11 +58,17 @@ class BreakTranspositionCipher {
         vector<string> brute_force(string cipher_text) {
             vector<string> res;
             int n = cipher_text.size();
-            for(int k=2; k<=n; k++) {
+            for(int key_size=2; key_size<= min(n, 26); key_size++) {
+                string key = utils.alphabet.substr(0, key_size);
                 
-                rails_fence = RailFenceCipher(k);
-                res.push_back(
-                    rails_fence.decrypt(cipher_text)
+                do {
+                    permutation_cipher = ColumnarPermutationCipher(key);
+
+                    res.push_back(
+                        permutation_cipher.decrypt(cipher_text)
+                    );
+                } while(
+                    next_permutation(key.begin(), key.end())
                 );
             }     
             return res;
@@ -70,21 +76,30 @@ class BreakTranspositionCipher {
 
         string frequency_distribution(string cipher_text) {
             double best_score = utils.INF;
-            int best_k = -1;
+            string best_key;
             string plain_text;
 
             int n = cipher_text.size();
-            
-            for(int k=2; k<=n; k++) {
-                rails_fence = RailFenceCipher(k);
-                string current_plain_text = rails_fence.decrypt(cipher_text);
-                double current_score = calculate_score(current_plain_text);
+            int max_cols = 10;
 
-                if(current_score < best_score) {
-                    best_score = current_score;
-                    plain_text = current_plain_text;
-                    best_k = k;
-                }
+            for(int key_size=2; key_size<=max_cols; key_size++) {
+                string key = utils.alphabet.substr(0, key_size);
+                
+                do {
+                    permutation_cipher = ColumnarPermutationCipher(key);
+                    string current_plain_text = permutation_cipher.decrypt(cipher_text);
+                    
+                    double current_score = calculate_score(current_plain_text);
+    
+                    if(current_score < best_score) {
+                        best_score = current_score;
+                        plain_text = current_plain_text;
+                        best_key = key;
+                    }
+                } while(
+                    next_permutation(key.begin(), key.end())
+                );
+                
             }
             return plain_text;
         }
