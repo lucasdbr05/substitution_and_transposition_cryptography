@@ -62,7 +62,7 @@ class BreakTranspositionCipher {
 
             for(int key_size=2; key_size<= min(max_cols, 26); key_size++) {
                 string key = utils.alphabet.substr(0, key_size);
-                cout << key << endl;
+                
                 do {
                     permutation_cipher = ColumnarPermutationCipher(key);
 
