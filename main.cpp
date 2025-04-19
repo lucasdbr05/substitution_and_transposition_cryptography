@@ -54,14 +54,14 @@ void do_command(string option, bool& user_input) {
         Logger::print_string("Type text to be encrypted:");
         text = input(user_input, "inputs/2A.txt");
         Logger::line_space();
-        ColumnarPermutationCipher columnar_permutation_cipher("LFU");
+        ColumnarPermutationCipher columnar_permutation_cipher("FLUZAO");
         Logger::print_string("Cipher text resulted from encryptation:");
         Logger::print_string(columnar_permutation_cipher.encrypt(text)); 
     } else if(option == "2B") {
         Logger::print_string("Type text to be decrypted:");
         text = input(user_input, "inputs/2B.txt");
         Logger::line_space();
-        ColumnarPermutationCipher columnar_permutation_cipher("LFU");
+        ColumnarPermutationCipher columnar_permutation_cipher("FLUZAO");
         Logger::print_string("Cipher text resulted from decryptation:");
         Logger::print_string(columnar_permutation_cipher.decrypt(text)); 
     } else if (option == "2C") {
