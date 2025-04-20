@@ -10,6 +10,12 @@
 using namespace std;
 
 
+
+/**
+ * @class BreakSubstitutionCipher
+ * @brief A class designed to break substitution ciphers using 
+ *  frequency analysis and brute force methods.
+ */
 class BreakSubstitutionCipher {
     private: 
         ShiftCipher shift_cipher;
@@ -38,7 +44,7 @@ class BreakSubstitutionCipher {
             
             return frequency_letter;
         }
-        
+
         vector<pair<double, char>> get_letters_frequency_in_descending_order(
             map<char, double>& frequency_letter
         ){
@@ -51,6 +57,12 @@ class BreakSubstitutionCipher {
             return sorted_frequency;
         }
 
+        
+        /**
+         * @brief Calculates a score for the given text based on letter frequency analysis.
+         * @param text The input text to evaluate.
+         * @return The calculated score, where a lower score indicates a closer match to expected letter frequencies.
+         */
         double calculate_score(string& text) {
             map<char, double> letters_frequency = get_letters_frequency_in_text(text);            
             double score = 0;
@@ -64,6 +76,11 @@ class BreakSubstitutionCipher {
     public:
         BreakSubstitutionCipher () {}
 
+        /**
+         * @brief Attempts to decrypt the cipher text using a brute force approach by trying all possible keys.
+         * @param cipher_text The encrypted text to decrypt.
+         * @return A vector of all possible decrypted texts for each key.
+         */
         vector<string> brute_force(string cipher_text) {
             vector<string> res;
             for(int k=0; k<26; k++) {                
@@ -75,6 +92,11 @@ class BreakSubstitutionCipher {
             return res;
         }
         
+        /**
+         * @brief Decrypts the cipher text using frequency distribution analysis to find the most likely plain text.
+         * @param cipher_text The encrypted text to decrypt.
+         * @return The decrypted plain text with the best score based on frequency analysis.
+         */
         string frequency_distribution(string cipher_text) {
             double best_score = utils.INF;
             int best_k = -1;
