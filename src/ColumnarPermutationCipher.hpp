@@ -89,8 +89,7 @@ class ColumnarPermutationCipher {
                 }
             }
             
-            permute_columns();
-                      
+            permute_columns();                    
             return build_cipher_text(rows);
         }
         
