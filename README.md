@@ -27,16 +27,18 @@ When running the project, the following command interface will appear in the ter
 </h4>
 
 ```shell
-T - Change to input from user 
+Select Option:
+
+T - Change to input from user
 0 - Stop
-1A - Encrypt using Caesar Cipher (substitution)
-1B - Decrypt using Caesar Cipher (substitution)
+1A - Encrypt using Ceasar Cipher (substitution)
+1B - Decrypt using Ceasar Cipher(substitution)
 1C - Break shift cipher by brute force
 1D - Break shift cipher by frequency distribution
-2A - Encrypt using Rail Fence Cipher (transposition)
-2B - Decrypt using Rail Fence Cipher (transposition)
-2C - Break rail fence by brute force
-2D - Break rail fence by frequency distribution
+2A - Encrypt using Columnar Permutation Cipher (transposition)
+2B - Decrypt using Columnar Permutation Cipher (transposition)
+2C - Break columnar permutation by brute force
+2D - Break columnar permutation by frequency distribution
 ```
 <h4>The commands are described as follows:</h4>
 <ul>

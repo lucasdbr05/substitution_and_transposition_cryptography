@@ -76,7 +76,7 @@ void do_command(string option, bool& user_input) {
         Logger::print_string("Type text to be broked using frequency distribution:");
         text = input(user_input, "inputs/2D.txt");
         Logger::line_space();
-        Logger::print_string("Frequency distribution generated the following text:");
+        Logger::print_string("Frequency distribution generated the following text (wait a few seconds):");
         Logger::print_string(crack.frequency_distribution(text));
     } else if(option == "T") {
         user_input = !user_input;
